@@ -1,0 +1,59 @@
+<!--Daniel Ortega-->
+<HTML>
+<HEAD><TITLE> Calcular letra NIF</TITLE></HEAD>
+<BODY>
+<?php
+    $dni="00000046";
+    $dni2=intval($dni, 10);
+    $aux=$dni2%23;
+    switch ($aux){
+        case(0):
+            echo "Su letra es: T, asi que su DNI es: $dni T";break;
+        case(1):
+            echo "Su letra es: R, asi que su DNI es: $dni R";break;
+        case(2):
+            echo "Su letra es: W, asi que su DNI es: $dni W";break;
+        case(3):
+            echo "Su letra es: A, asi que su DNI es: $dni A";break;
+        case(4):
+            echo "Su letra es: G, asi que su DNI es: $dni G";break;
+        case(5):
+            echo "Su letra es: M, asi que su DNI es: $dni M";break;
+        case(6):
+            echo "Su letra es: Y, asi que su DNI es: $dni Y";break;
+        case(7):
+            echo "Su letra es: F, asi que su DNI es: $dni F";break;
+        case(8):
+            echo "Su letra es: P, asi que su DNI es: $dni P";break;
+        case(9):
+            echo "Su letra es: D, asi que su DNI es: $dni D";break;
+        case(10):
+            echo "Su letra es: X, asi que su DNI es: $dni X";break;
+        case(11):
+            echo "Su letra es: B, asi que su DNI es: $dni B";break;
+        case(12):
+            echo "Su letra es: N, asi que su DNI es: $dni N";break;
+        case(13):
+            echo "Su letra es: J, asi que su DNI es: $dni J";break;
+        case(14):
+            echo "Su letra es: Z, asi que su DNI es: $dni Z";break;
+        case(15):
+            echo "Su letra es: S, asi que su DNI es: $dni S";break;
+        case(16):
+            echo "Su letra es: Q, asi que su DNI es: $dni Q";break;
+        case(17):
+            echo "Su letra es: V, asi que su DNI es: $dni V";break;
+        case(18):
+            echo "Su letra es: H, asi que su DNI es: $dni H";break;
+        case(19):
+            echo "Su letra es: L, asi que su DNI es: $dni L";break;
+        case(20):
+            echo "Su letra es: C, asi que su DNI es: $dni C";break;
+        case(21):
+            echo "Su letra es: K, asi que su DNI es: $dni K";break;
+        case(22):
+            echo "Su letra es: E, asi que su DNI es: $dni E";break;
+    }
+?>
+</BODY>
+</HTML>
