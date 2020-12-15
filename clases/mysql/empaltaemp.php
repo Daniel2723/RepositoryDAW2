@@ -1,80 +1,79 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Alta Departamentos HTML</title>
-</head>
-<body>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "rootroot";
+$dbname = "empleadosnn";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
     
-	<form action="empaltadpto.php" method="REQUEST">
-	<p>Nombre Departamento<input type='text' name='nombreDep'><br>
-		<p><input type="submit" value="Alta Departamento" name="altaDep"></p>
-	</form>
-
-	
-</body>
-</html>
-
-<h1>Listado empleados departamento </h1>
-<?php
-
-/* Conexión BD */
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'rootroot');
-define('DB_DATABASE', 'empleadosnn');
-$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-   
-   if (!$db) {
-		die("Error conexión: " . mysqli_connect_error());
-	}
-
-/* Se muestra el formulario la primera vez */
-if (!isset($_POST) || empty($_POST)) { 
-
-	/*Función que obtiene los departamentos de la empresa*/
-	$departamentos = obtenerDepartamentos($db);
-	
-    /* Se inicializa la lista valores*/
-	echo '<form action="" method="post">';
+    if (!isset($_POST) || empty($_POST)) { 
+        
+        $stmt = $conn->prepare("SELECT nombre_dpto FROM departamento");
+        $stmt->execute();
+        
+        $departamentos = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        
+        echo '<form action="empaltaemp.php" method="request">';
 ?>
-	<div>
-	<label for="departamento">Departamentos:</label>
-	<select name="departamento">
-		<?php foreach($departamentos as $departamento) : ?>
-			<option> <?php echo $departamento ?> </option>
-		<?php endforeach; ?>
-	</select>
-	</div>
-	</BR>
+        
+        <div>
+        <label for="dni">DNI</label>
+        <input name="dni" type="text"/><br>
+        <label for="nombre">Nombre</label>
+        <input name="nombre" type="text"/><br>
+        <label for="apellidos">Apellidos</label>
+        <input name="apellidos" type="text"/><br>
+        <label for="fechaNac">Fecha de Nacimiento</label>
+        <input name="fechaNac" type="date"/><br>
+        <label for="salario">Salario</label>
+        <input name="salario" type="text"/><br>
+        <label for="departamento">Departamentos:</label>
+        <select name="departamento">
+        <?php 
+            foreach($stmt->fetchAll() as $departamento) {
+                echo "<option>$departamento[nombre_dpto]</option>";
+            }
+        ?>
+        </select>
+        </div>
+        </BR>
 <?php
-	echo '<div><input type="submit" value="Mostrar Departamentos"></div>
-	</form>';
-} else { 
+        echo '<div><input type="submit" value="Actualizar Datos"></div>
+        </form>';
+        
+        
+        
+    } else { 
+        echo "owo";
+    $nombre=$_REQUEST['nombre'];
+        $dni=$_REQUEST["dni"];
+        $apellidos=$_REQUEST["apellidos"];
+        $fechaNac=$_REQUEST["fechaNac"];
+        null;
+	
+    }
     
-    null;
-	
 }
+catch(PDOException $e)
+    {
+    echo "Error: " . $e->getMessage();
+    }
+$conn = null; 
+
 ?>
 
-<?php
-// Funciones utilizadas en el programa
+<!--CREATE TABLE empleado
+(dni 		VARCHAR(9),
+ nombre 	VARCHAR(40),
+ apellidos 	VARCHAR(40),
+ fecha_nac	DATE,
+ salario	DOUBLE); 
 
-// Obtengo todos los departamentos para mostrarlos en la lista de valores
-function obtenerDepartamentos($db) {
-	$departamentos = array();
-	
-	$sql = "SELECT cod_dpto,nombre_dpto FROM departamento";
-	
-	$resultado = mysqli_query($db, $sql);
-	if ($resultado) {
-		while ($row = mysqli_fetch_assoc($resultado)) {
-			$departamentos[] = $row['nombre_dpto'];
-		}
-	}
-	return $departamentos;
-}
-
-
-	
-
+CREATE TABLE emple_depart
+(dni 		VARCHAR(9),
+ cod_dpto   VARCHAR(4),
+ fecha_ini	DATETIME,
+ fecha_fin	DATETIME);
+-->
